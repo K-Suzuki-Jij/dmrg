@@ -1,2 +1,7 @@
 *.xcodeproj
 *.DS_Store
+*.o
+*.a
+SML_log
+result
+build

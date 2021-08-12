@@ -1,32 +1,42 @@
-PROGNAME := 1D_EKLM_DMRG.out
-SRCDIR   := src
-OUTDIR   := build
-INCDIR   := include
-SMLDIR   := sml
-MODDIR   := model/EKLM
+SMLDIR  := sml
 DMRGDIR  := dmrg
-TARGET   := $(OUTDIR)/$(PROGNAME)
-SRCS     := $(wildcard $(SRCDIR)/*.cpp) $(wildcard ../../../$(SMLDIR)/*.cpp) $(wildcard ../../../$(MODDIR)/*.cpp) $(wildcard ../../../$(DMRGDIR)/*.cpp)
-OBJS     := $(addprefix $(OUTDIR)/,$(patsubst %.cpp,%.o,$(SRCS)))
-
-#CC = icpc
-#CFLAGS = -Wall -std=c++17 -O3 -qopenmp -parallel -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I $(INCDIR)
-#LFLAGS = -mkl
+MEKLMDIR := model/EKLM
+INCDIR   := ../include
 
 CC = g++
-CFLAGS = -Wall -std=c++17 -O3 -mtune=native -march=native -Xpreprocessor -fopenmp -I ../../../$(INCDIR)
+CFLAGS = -Wall -Wextra -std=c++17 -Ofast -mtune=native -march=native -Xpreprocessor -fopenmp -I $(INCDIR)
 LFLAGS = -llapack -lomp
 
-.PHONY: all clean
+.PHONY: all sml dmrg model clean
 
-all: $(TARGET)
+all: sml dmrg model
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+sml  : libsml.a
+dmrg : libdmrg.a
+model: libmeklm.a
 
-$(OUTDIR)/%.o: %.cpp
+libsml.a: $(addprefix $(SMLDIR)/,$(patsubst %.cpp,%.o,$(wildcard ../$(SMLDIR)/*.cpp)))
+	ar r libsml.a $(SMLDIR)/*.o
+	
+libmeklm.a: $(addprefix $(MEKLMDIR)/,$(notdir $(patsubst %.cpp,%.o,$(wildcard ../$(MEKLMDIR)/*.cpp))))
+	ar r libmeklm.a $(MEKLMDIR)/*.o
+
+libdmrg.a: $(addprefix $(DMRGDIR)/,$(patsubst %.cpp,%.o,$(wildcard ../$(DMRGDIR)/*.cpp)))
+	ar r libdmrg.a $(DMRGDIR)/*.o
+
+$(SMLDIR)/%.o: ../$(SMLDIR)/%.cpp
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $(SMLDIR)/$(@F) -c ../$(SMLDIR)/$(<F)
+	
+$(MEKLMDIR)/%.o: ../$(MEKLMDIR)/%.cpp
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(CC) $(CFLAGS) -o $(MEKLMDIR)/$(@F) -c ../$(MEKLMDIR)/$(<F)
 
+$(DMRGDIR)/%.o: ../$(DMRGDIR)/%.cpp
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(CC) $(CFLAGS) -o $(DMRGDIR)/$(@F) -c ../$(DMRGDIR)/$(<F)
+	
 clean:
-	rm -rf $(OUTDIR)
+	rm -rf $(SMLDIR) model $(DMRGDIR)
+	rm *.a
+
