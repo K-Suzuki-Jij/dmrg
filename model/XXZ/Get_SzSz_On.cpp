@@ -5,7 +5,7 @@ void Model_1D_XXZ::Get_SzSz_On(CRS &M, double coeef) {
    
    Check_Parameters();
    
-   Clear_CRS(M);
+   Free_CRS(M);
    
    M.row_dim = Find_Dim_Onsite();
    M.col_dim = Find_Dim_Onsite();
