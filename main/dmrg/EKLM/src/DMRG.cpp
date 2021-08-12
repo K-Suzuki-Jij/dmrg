@@ -15,8 +15,8 @@ void DMRG(Model_1D_EKLM &Model, DMRG_Param &Dmrg_Param, Diag_Param &Diag_Param) 
    Allocate_Block(System, Model);
    Allocate_Block(Enviro, Model);
    
-   Print_CRS(Model.CUp_On[0], "ddd");
-   std::exit(0);
+   //Print_CRS(Model.CUp_On[0], "ddd");
+   //std::exit(0);
    
    DMRG_Basis_Stored Basis_System, Basis_Enviro;
    Allocate_Basis(Basis_System, Model);
