@@ -71,5 +71,5 @@ void Model_1D_TAKLM::Get_Ham_On(CRS &M) {
    Matrix_Matrix_Sum(Temp1   , NC_1          , Temp2);
    Matrix_Matrix_Sum(Temp2   , NC_2          , M    );
 
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
 }

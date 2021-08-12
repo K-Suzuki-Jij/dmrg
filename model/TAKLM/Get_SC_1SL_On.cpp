@@ -29,5 +29,5 @@ void Model_1D_TAKLM::Get_SC_1SL_On(CRS &M, double coeef) {
    
    Matrix_Constant_Multiplication(M, coeef, 1);
  
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
 }
