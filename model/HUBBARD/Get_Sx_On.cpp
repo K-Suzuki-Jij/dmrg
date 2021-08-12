@@ -8,5 +8,5 @@ void Model_1D_HUBBARD::Get_Sx_On(CRS &M, double coeef) {
     Get_Sm_On(Temp_SmC_On, coeef*0.5);
     Matrix_Matrix_Sum(Temp_SpC_On, Temp_SmC_On, M);
     
-    Check_Symmetric_Matrix(M, zero_precision, 1);
+    Check_Symmetric_Matrix(M, zero_precision);
 }

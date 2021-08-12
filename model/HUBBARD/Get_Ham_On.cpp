@@ -18,5 +18,5 @@ void Model_1D_HUBBARD::Get_Ham_On(CRS &M) {
     Matrix_Matrix_Sum(Sz, NC, Temp1);
     Matrix_Matrix_Sum(Temp1, NCUpNCDown, M);
     
-    Check_Symmetric_Matrix(M, zero_precision, 1);
+    Check_Symmetric_Matrix(M, zero_precision);
 }

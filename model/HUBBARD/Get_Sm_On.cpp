@@ -14,7 +14,7 @@ void Model_1D_HUBBARD::Get_Sm_On(CRS &M, double coeef) {
    
     Check_Parameters();
     
-    Clear_CRS(M);
+    Free_CRS(M);
     M.row_dim = dim_onsite;
     M.col_dim = dim_onsite;
 
