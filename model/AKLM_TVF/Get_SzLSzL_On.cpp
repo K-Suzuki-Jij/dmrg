@@ -9,5 +9,5 @@ void Model_1D_AKLM_TVF::Get_SzLSzL_On(CRS &M, double coeef) {
    Matrix_Matrix_Product(Temp_SzL_On, Temp_SzL_On, M);
    Matrix_Constant_Multiplication(M, coeef, 1);
    
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
 }

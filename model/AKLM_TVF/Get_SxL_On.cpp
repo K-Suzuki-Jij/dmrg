@@ -9,5 +9,5 @@ void Model_1D_AKLM_TVF::Get_SxL_On(CRS &M, double coeef) {
    Get_SmL_On(Temp_SmL_On, coeef*0.5);
    Matrix_Matrix_Sum(Temp_SpL_On, Temp_SmL_On, M);
    
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
 }

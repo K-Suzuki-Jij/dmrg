@@ -44,13 +44,13 @@ void Model_1D_AKLM_TVF::Get_Ham_On(CRS &M) {
    Matrix_Matrix_Sum(SxCSxL, SyCSyL    , Temp1);
    Matrix_Matrix_Sum(Temp1 , SzCSzL    , Temp2);
    Matrix_Matrix_Sum(Temp2 , SxC       , Temp1);
-   Check_Symmetric_Matrix(Temp1, zero_precision, 1);
+   Check_Symmetric_Matrix(Temp1, zero_precision);
 
    Matrix_Matrix_Sum(Temp1 , SxL       , Temp2);
    Matrix_Matrix_Sum(Temp2 , SzLSzL    , Temp1);
    Matrix_Matrix_Sum(Temp1 , NCUpNCDown, Temp2);
    Matrix_Matrix_Sum(Temp2 , NC        , M    );
    
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
    
 }

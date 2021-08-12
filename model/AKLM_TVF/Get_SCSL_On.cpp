@@ -29,5 +29,5 @@ void Model_1D_AKLM_TVF::Get_SCSL_On(CRS &M, double coeef) {
    
    Matrix_Constant_Multiplication(M, coeef, 1);
  
-   Check_Symmetric_Matrix(M, zero_precision, 1);
+   Check_Symmetric_Matrix(M, zero_precision);
 }
