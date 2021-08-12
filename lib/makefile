@@ -1,5 +1,6 @@
 SMLDIR      := sml
 DMRGDIR     := dmrg
+EDDIR       := exact_diag
 INCDIR      := ../include
 MAKLMDIR    := model/AKLM
 MAKLTVFMDIR := model/AKLM_TVF
@@ -12,12 +13,13 @@ CC = g++
 CFLAGS = -Wall -Wextra -std=c++17 -Ofast -mtune=native -march=native -Xpreprocessor -fopenmp -I $(INCDIR)
 LFLAGS = -llapack -lomp
 
-.PHONY: all sml dmrg model clean
+.PHONY: all sml dmrg model exact clean
 
-all: sml dmrg model
+all: sml dmrg model exact
 
 sml  : libsml.a
 dmrg : libdmrg.a
+exact: libed.a
 model: libmaklm.a libmaklm_tvf.a libmeklm.a libmhubbard.a libmtaklm.a libmxxz.a
 
 ###SML
@@ -47,6 +49,8 @@ libmxxz.a: $(addprefix $(MXXZDIR)/,$(notdir $(patsubst %.cpp,%.o,$(wildcard ../$
 libdmrg.a: $(addprefix $(DMRGDIR)/,$(patsubst %.cpp,%.o,$(wildcard ../$(DMRGDIR)/*.cpp)))
 	ar r $@ $^
 	
+libed.a: $(addprefix $(EDDIR)/,$(patsubst %.cpp,%.o,$(wildcard ../$(EDDIR)/*.cpp)))
+	ar r $@ $^
 	
 $(SMLDIR)/%.o: ../$(SMLDIR)/%.cpp
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
@@ -79,6 +83,10 @@ $(MXXZDIR)/%.o: ../$(MXXZDIR)/%.cpp
 $(DMRGDIR)/%.o: ../$(DMRGDIR)/%.cpp
 	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
 	$(CC) $(CFLAGS) -o $(DMRGDIR)/$(@F) -c ../$(DMRGDIR)/$(<F)
+	
+$(EDDIR)/%.o: ../$(EDDIR)/%.cpp
+	@if [ ! -e `dirname $@` ]; then mkdir -p `dirname $@`; fi
+	$(CC) $(CFLAGS) -o $(EDDIR)/$(@F) -c ../$(EDDIR)/$(<F)
 	
 clean:
 	rm -rf $(SMLDIR) model $(DMRGDIR)
