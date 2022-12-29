@@ -10,12 +10,16 @@ MTAKLMDIR   := model/TAKLM
 MXXZDIR     := model/XXZ
 
 # MacOS clang
-#CC = g++
-#CFLAGS = -Wall -Wextra -std=c++17 -Ofast -Xpreprocessor -fopenmp -I $(INCDIR)
+CC = g++
+CFLAGS = -Wall -Wextra -std=c++17 -Ofast -Xpreprocessor -fopenmp -I $(INCDIR)
 
 # Linux
-CC = g++
-CFLAGS = -Wall -Wextra -std=c++17 -Ofast -fopenmp -I $(INCDIR)
+#CC = g++
+#CFLAGS = -Wall -Wextra -std=c++17 -Ofast -fopenmp -I $(INCDIR)
+
+# Linux OneAPI
+#CC = icx
+#CFLAGS = -Wall -std=c++17 -Ofast -fiopenmp -I $(INCDIR)
 
 .PHONY: all sml dmrg model exact clean
 

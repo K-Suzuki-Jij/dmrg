@@ -7,13 +7,20 @@ TARGET   := $(OUTDIR)/$(PROGNAME)
 SRCS     := $(wildcard $(SRCDIR)/*.cpp)
 OBJS     := $(addprefix $(OUTDIR)/,$(patsubst %.cpp,%.o,$(SRCS)))
 
-#CC = icpc
-#CFLAGS = -Wall -std=c++17 -O3 -qopenmp -parallel -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I $(INCDIR)
-#LFLAGS = -mkl
-
+# Mac OS clang
 CC = g++
-CFLAGS = -Wall -std=c++17 -O3 -mtune=native -march=native -Xpreprocessor -fopenmp -I $(INCDIR)
-LFLAGS = -llapack -lomp -lsml -ldmrg -lmaklm_tvf -L $(LIBDIR)
+CFLAGS = -Wall -std=c++17 -O3 -Xpreprocessor -fopenmp -I $(INCDIR)
+LFLAGS = -lmeklm -ldmrg -lsml -llapack -lomp -L $(LIBDIR)
+
+# Linux
+#CC = g++
+#CFLAGS = -Wall -std=c++17 -O3 -fopenmp -I $(INCDIR)
+#LFLAGS = -lmeklm -ldmrg -lsml -llapack -L $(LIBDIR)
+
+# Linux OneAPI
+#CC = icx
+#CFLAGS = -Wall -std=c++17 -Ofast -fiopenmp -I $(INCDIR)
+#LFLAGS = -lmeklm -ldmrg -lsml -lstdc++ -llapack -L $(LIBDIR)
 
 .PHONY: all clean
 
