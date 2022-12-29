@@ -33,6 +33,11 @@ Again here, If you use Linux systems, please comment out Mac OS clang commands.
 https://github.com/K-Suzuki-Jij/dmrg_CPP/blob/9830c86fbf079d3416be74aa4f6893ec3c4d181a/main/dmrg/EKLM/makefile#L10-L13
 and then uncomment Linux command.
 Finally, you can execute program appeared in `dmrg_CPP/main/dmrg/EKLM/build/1D_EKLM_DMRG.out`
+
+```
+./build/1D_EKLM_DMRG.out
+```
+
 Calculation log will be appeared.
 <img width="1365" alt="Screenshot 2022-12-30 at 0 30 49" src="https://user-images.githubusercontent.com/78338408/209974953-a4984df4-723d-48de-86dd-287ca8145e3d.png">
 
