@@ -11,9 +11,15 @@ OBJS     := $(addprefix $(OUTDIR)/,$(patsubst %.cpp,%.o,$(SRCS)))
 #CFLAGS = -Wall -std=c++17 -O3 -qopenmp -parallel -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I $(INCDIR)
 #LFLAGS = -mkl
 
+# Mac OS clang
+#CC = g++
+#CFLAGS = -Wall -std=c++17 -O3 -Xpreprocessor -fopenmp -I $(INCDIR)
+#LFLAGS = -lmeklm -ldmrg -lsml -llapack -lomp -L $(LIBDIR)
+
+# Linux
 CC = g++
-CFLAGS = -Wall -std=c++17 -O3 -mtune=native -march=native -Xpreprocessor -fopenmp -I $(INCDIR)
-LFLAGS = -llapack -lomp -lsml -ldmrg -lmeklm -L $(LIBDIR)
+CFLAGS = -Wall -std=c++17 -O3 -fopenmp -I $(INCDIR)
+LFLAGS = -lmeklm -ldmrg -lsml -llapack -L $(LIBDIR)
 
 .PHONY: all clean
 

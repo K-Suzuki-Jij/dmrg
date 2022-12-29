@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
    Model.p_thread = 4;
    ////////////////////////////////////////////////
    Model.BC          = "OBC";
-   Model.system_size = 18;
+   Model.system_size = 12;
    Model.tot_sz      = 0;
    Model.spin        = 2;
    ////////////////////////////////////////////////

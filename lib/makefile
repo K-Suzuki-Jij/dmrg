@@ -9,9 +9,13 @@ MHUBDIR     := model/HUBBARD
 MTAKLMDIR   := model/TAKLM
 MXXZDIR     := model/XXZ
 
+# MacOS clang
+#CC = g++
+#CFLAGS = -Wall -Wextra -std=c++17 -Ofast -Xpreprocessor -fopenmp -I $(INCDIR)
+
+# Linux
 CC = g++
-CFLAGS = -Wall -Wextra -std=c++17 -Ofast -mtune=native -march=native -Xpreprocessor -fopenmp -I $(INCDIR)
-LFLAGS = -llapack -lomp
+CFLAGS = -Wall -Wextra -std=c++17 -Ofast -fopenmp -I $(INCDIR)
 
 .PHONY: all sml dmrg model exact clean
 
@@ -89,6 +93,6 @@ $(EDDIR)/%.o: ../$(EDDIR)/%.cpp
 	$(CC) $(CFLAGS) -o $(EDDIR)/$(@F) -c ../$(EDDIR)/$(<F)
 	
 clean:
-	rm -rf $(SMLDIR) model $(DMRGDIR)
+	rm -rf $(SMLDIR) model $(DMRGDIR) $(EDDIR)
 	rm *.a
 

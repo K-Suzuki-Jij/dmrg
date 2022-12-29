@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <omp.h>
+#include <climits>
 #include "DMRG.hpp"
 
 void DMRG_Construct_Superblock(DMRG_Basis &Basis, const DMRG_Basis_Stored &Basis_System, const DMRG_Basis_Stored &Basis_Enviro, DMRG_Block_Information &Block, std::string Initial_Guess_Flag, DMRG_Time &Time, int p_threads) {
